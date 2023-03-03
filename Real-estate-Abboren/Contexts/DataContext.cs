@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Real_estate_Abboren.Models.Entities;
+
 namespace Real_estate_Abboren.Contexts;
 
 internal class DataContext : DbContext
@@ -24,7 +26,9 @@ internal class DataContext : DbContext
 
     #endregion
 
-    #region entitites
+    public DbSet<AddressEntity> Addresses { get; set; } = null!;
+    public DbSet<RenterEntity>  Renters { get; set; } = null!;
+    public DbSet<CaseEntity> Cases { get; set; } = null!;
 
-    #endregion
+
 }
