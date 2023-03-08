@@ -5,7 +5,7 @@ namespace Real_estate_Abboren.Services
 {
     internal class MenuService
     {
-        public async void CreateNewContactAsync()
+        public async Task CreateNewContactAsync()
         {
             var renter = new Renter();
 
@@ -105,46 +105,47 @@ namespace Real_estate_Abboren.Services
             {
 
                 var renter = await RenterService.GetAsync(email);
+                if (renter != null)
+                {
+                    Console.WriteLine("Skriv in information på de fält som du vill uppdatera. \n");
 
-                Console.Write("Förnamn: "); 
-                renter.FirstName = Console.ReadLine() ?? null!;
+                    Console.Write("Förnamn: ");
+                    renter.FirstName = Console.ReadLine() ?? null!;
 
+                    Console.Write("Efternamn: ");
+                    renter.LastName = Console.ReadLine() ?? null!;
 
-                Console.Write("Efternamn: ");
-                renter.LastName = Console.ReadLine() ?? null!;
+                    Console.Write("E-postadress: ");
+                    renter.Email = Console.ReadLine() ?? null!;
 
+                    Console.Write("Telefonnummer: ");
+                    renter.PhoneNumber = Console.ReadLine() ?? null!;
 
-                Console.Write("E-postadress: ");
-                renter.Email = Console.ReadLine() ?? null!;
+                    Console.Write("Gatuadress: ");
+                    renter.StreetName = Console.ReadLine() ?? null!;
 
+                    Console.Write("Postnummer: ");
+                    renter.PostalCode = Console.ReadLine() ?? null!;
 
-                Console.Write("Telefonnummer: ");
-                renter.PhoneNumber = Console.ReadLine() ?? null!;
+                    Console.Write("Stad: ");
+                    renter.City = Console.ReadLine() ?? null!;
 
-
-                Console.Write("Gatuadress: ");
-                renter.StreetName = Console.ReadLine() ?? null!;
-
-
-                Console.Write("Postnummer: ");
-                renter.PostalCode = Console.ReadLine() ?? null!;
-
-
-                Console.Write("Stad: ");
-                renter.City = Console.ReadLine() ?? null!;
-
-                //update specific renter from database
-                await RenterService.DeleteAsync(email);
+                    //update specific renter from database
+                    await RenterService.DeleteAsync(email);
+                }
+                else
+                {
+                    Console.WriteLine($"Hittade inte någon kund med den angivna e-postadressen.");
+                    Console.WriteLine("");
+                }
             }
+
             else
             {
                 Console.WriteLine($"Ingen e-postadress angiven.");
                 Console.WriteLine("");
             }
         }
-
-
-
 
 
         public async Task DeleteSpecificContactAsync()
